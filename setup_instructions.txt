@@ -1,0 +1,50 @@
+
+// install curl
+
+// install pathogen
+mkdir -p ~/.vim/autoload ~/.vim/bundle 
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+// install git
+
+// YOU COMPLETE ME (CMAKE dependency)
+git clone https://github.com/Valloric/YouCompleteMe.git
+cd YouCompleteMe
+git submodule update --init --recursive
+./install.py --clang-completer
+
+// NERDTree
+cd ~/.vim/bundle
+git clone https://github.com/scrooloose/nerdtree.git
+
+// TAGBAR (dependency Exuberant ctags 5.5)
+// include ctags in $PATH
+git clone git://github.com/majutsushi/tagbar
+
+// VIM-AIRLINE
+git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline
+git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/bundle/vim-airline-themes
+
+// SOLARIZED
+git clone git://github.com/altercation/vim-colors-solarized.git
+
+////////////////////////////////////////////////////////////////////////
+// install tmux
+// tmux commands
+tmux new -s session_name
+tmux kill-session -t myname
+
+CTRL+B %   (vertical split)
+CTRL+B ""  (horizontal split)
+CTRL+B <ARROW> (move between panes)
+CTRL+B z (Toggle pane to full screen)
+
+PREFIX : resize-pane -D (Resizes the current pane down)
+PREFIX : resize-pane -U (Resizes the current pane upward)
+PREFIX : resize-pane -L (Resizes the current pane left)
+PREFIX : resize-pane -R (Resizes the current pane right)
+PREFIX : resize-pane -D 20 (Resizes the current pane down by 20 cells)
+PREFIX : resize-pane -U 20 (Resizes the current pane upward by 20 cells)
+PREFIX : resize-pane -L 20 (Resizes the current pane left by 20 cells)
+PREFIX : resize-pane -R 20 (Resizes the current pane right by 20 cells)
+////////////////////////////////////////////////////////////////////////
