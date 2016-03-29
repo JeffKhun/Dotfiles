@@ -1,4 +1,4 @@
-﻿
+
 """"""""""
 " PATHOGEN
 """"""""""
@@ -46,19 +46,16 @@ colorscheme torte
 set colorcolumn=+1
 
 
-"""""""""""
-" SOLARIZED
-"""""""""""
-"syntax enable
-"set background=dark
-"colorscheme solarized
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """"""""""
 " NERDTREE
 """"""""""
 map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 """"""""
@@ -70,7 +67,16 @@ nmap <F8> :TagbarToggle<CR>
 """""""""""""
 " VIM-AIRLINE
 """""""""""""
+let g:airline_theme='dark'
 let g:airline#extensions#tabline#enabled = 1
+
+
+"""""""""""
+" SOLARIZED
+"""""""""""
+"syntax enable
+"set background=dark
+"colorscheme solarized
 
 
 """""""""
