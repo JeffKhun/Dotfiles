@@ -48,3 +48,24 @@ PREFIX : resize-pane -U 20 (Resizes the current pane upward by 20 cells)
 PREFIX : resize-pane -L 20 (Resizes the current pane left by 20 cells)
 PREFIX : resize-pane -R 20 (Resizes the current pane right by 20 cells)
 ////////////////////////////////////////////////////////////////////////
+
+// Sublime Clang
+1) curl -kL http://xrl.us/pythonbrewinstall | bash
+2) source "$HOME/.pythonbrew/etc/bashrc"
+3) pythonbrew install --configure="--enable-unicode=ucs4" 2.6
+4) ln -s $HOME/.pythonbrew/pythons/Python-2.6/lib/python2.6/ <your Sublime Text 2 folder>/lib/python2.6
+5) git clone --recursive https://github.com/quarnster/SublimeClang SublimeClang
+6) cd src
+7) mkdir build
+8) cd build
+9) cmake ..
+10)make
+
+"options":
+    [
+        "-isystem", "/usr/include/c++/*",
+        "-isystem", "/usr/include/c++/4.9/",
+        "-isystem", "/usr/include/x86_64-linux-gnu",
+        "-isystem", "/usr/include/x86_64-linux-gnu/c++/4.9",
+        "-Wall"
+    ],
