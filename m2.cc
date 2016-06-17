@@ -93,7 +93,7 @@ const bool grammarParser(const unsigned char* s, string &r) {
             if (stk.empty() || s[++i]!='{') return false;
             size_t num=0;
             while (s[++i]!='}') {
-                if (s[i]>='0' && s[i]<='9')  //checks in {0,...9}
+                if (s[i]>='0' && s[i]<='9')  //checks s[i] in {0,...9}
                     num=(num*10)+(s[i]-'0'); //number of repetitions
                 else return false;
             }
