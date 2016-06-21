@@ -2,11 +2,18 @@
 #include <string>
 #include <sstream>
 #include <vector>
-/**
- * @author Jeffrey Lim
- * assessment
- */
+#include <algorithm>
 
+/**
+ * @param pattern
+ * @return stl string representation of pattern
+ */
+std::string toString(const std::vector<unsigned char> &pattern) {
+    std::ostringstream oss;
+    for (size_t i=0; i<pattern.size(); ++i)
+        oss<<pattern[i];
+    return oss.str();
+}
 
 /**
  * Determines strlen of unsigned char* without reinterpret or c-style casts.
@@ -27,20 +34,20 @@ const size_t ustrlen(const unsigned char *str) {
  */
 const bool boyerMooreHorspool(const unsigned char *text,  const std::vector<unsigned char> &pattern) {
 
-    const size_t patternLength=pattern.size();
-    const size_t textLength=ustrlen(text);
+    const int patternLength=pattern.size();
+    const int textLength=ustrlen(text);
  
     if (patternLength>textLength) return false;
     if (patternLength==0 && textLength>0) return false;
 
     int cache[1<<8];
     std::fill(cache, cache+(1<<8), -1);
-    for (size_t i=0; i<patternLength; ++i)
+    for (int i=0; i<patternLength; ++i)
         cache[(unsigned char)(pattern[i])]=i;
  
-    size_t shift = 0;
+    int shift = 0;
     while (shift<=(textLength-patternLength)) {
-        ptrdiff_t rhsIdx=patternLength-1;
+        int rhsIdx=patternLength-1;
         while (rhsIdx>=0 && pattern[rhsIdx]==text[shift+rhsIdx])
             --rhsIdx;
         if (rhsIdx<0)
@@ -52,7 +59,7 @@ const bool boyerMooreHorspool(const unsigned char *text,  const std::vector<unsi
 }
 
 /**
- * Expands pattern according to grammar rules.
+ * Expands pattern according to grammar.
  * @param original unparsed pattern
  * @param subsequent parsed pattern
  * @return Returns true if success, false in the event of invalid grammar
@@ -61,7 +68,6 @@ const bool grammarParser(const unsigned char* pattern, std::vector<unsigned char
     
     size_t i=0;
     while (pattern[i]!='\0') {
-        unsigned char ch=pattern[i];
         if (pattern[i]=='\\') {   //Case 1: escape character
             parsedPattern.push_back(pattern[++i]);
         } else if (pattern[i]==']') { //Case 2: closing square bracket
@@ -110,17 +116,6 @@ const bool grammarParser(const unsigned char* pattern, std::vector<unsigned char
 }
 
 /**
- * @param pattern
- * @return stl string representation of pattern
- */
-std::string representation(const std::vector<unsigned char> &pattern) {
-    std::ostringstream oss;
-    for (size_t i=0; i<pattern.size(); ++i)
-        oss<<pattern[i];
-    return oss.str();
-}
-
-/**
  * Main calling function
  * @param text
  * @param pattern
@@ -131,7 +126,7 @@ std::string PatternSearch(const unsigned char* pStr, const unsigned char* pMatch
     std::vector<unsigned char> expandedPattern;
     expandedPattern.reserve(ustrlen(pMatch));
     if (!grammarParser(pMatch, expandedPattern)) return ERROR;
-    return boyerMooreHorspool(pStr, expandedPattern)==true?representation(expandedPattern):"";
+    return boyerMooreHorspool(pStr, expandedPattern)==true?toString(expandedPattern):"";
 }
 int main() {
     unsigned char Str[]="ÿaÿþcc";//"qÿ";//"abcdeabc abcffaÿaa";
