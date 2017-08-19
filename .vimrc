@@ -1,3 +1,4 @@
+set nocompatible
 
 """"""""""
 " PATHOGEN
@@ -12,9 +13,11 @@ set encoding=utf-8
 set formatoptions=tcrn
 set textwidth=80
 set tabstop=4
-set shiftwidth=2
+set shiftwidth=4
 set expandtab
 set autowrite
+"set autoindent
+set smartindent
 
 set nocompatible
 filetype on
@@ -41,14 +44,19 @@ set backspace=2 " backspace over everything
 "set foldlevel=3
 "set foldmethod=marker
 
+set hlsearch   "set nohlsearch " do not highlight searchstrings
+set incsearch  " do incremental searching
+
 set guifont=Lucida_Console:h10
 colorscheme torte
 set colorcolumn=+1
 
 
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -84,3 +92,4 @@ let g:airline#extensions#tabline#enabled = 1
 """""""""
 let g:load_doxygen_syntax=1
 let g:doxygen_enhanced_color=1
+
