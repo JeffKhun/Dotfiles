@@ -1,0 +1,55 @@
+#include <cmath>
+#include <cstdlib>
+#include <cstdio>
+#include <climits>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <list>
+#include <queue>
+#include <set>
+#include <map>
+#include <functional>
+#include <bitset>
+using namespace std;
+
+int n, m, w, weight[1001], beauty[1001], dp[1001], tw=0, tb=0;
+bool g[1001][1001], intree[1001];
+vector<int> f;
+void dfs(int v) {
+    if (intree[v]) return;
+    intree[v]=1;
+    f.push_back(v);
+    tw+=weight[v];
+    tb+=beauty[v];
+    for (int i=0; i<n; ++i)
+        if (g[v][i] && !intree[i])
+            dfs(i);
+}
+int main() {
+    cin>>n>>m>>w;
+    for (int i=0; i<n; ++i) cin>>weight[i];
+    for (int i=0; i<n; ++i) cin>>beauty[i];
+    for (int i=0; i<m; ++i) {
+        int x, y;
+        cin>>x>>y;
+        --x; --y;
+        g[x][y]=g[y][x]=1;
+    }
+    for (int i=0; i<n; ++i) {
+        f.clear();
+        tb=tw=0;
+        dfs(i);
+        for (int j=w; j>=0; --j) {
+            if (j+tw<=w) dp[j+tw]=max(dp[j+tw], dp[j]+tb);
+            for (int k=0; k<f.size(); ++k)
+                if (j+weight[f[k]]<=w) dp[j+weight[f[k]]]=max(dp[j+weight[f[k]]], dp[j]+beauty[f[k]]);
+        }
+    }
+    cout<<*max_element(dp, dp+w+1)<<endl;
+    return 0;
+}
